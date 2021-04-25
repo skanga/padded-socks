@@ -1,6 +1,8 @@
 # padded-socks
 
-A netty4-based socks5 proxy server with support for proxy auto-config (wpad) based backend redirection.
+A netty based socks5 proxy server with support for proxy auto-config (wpad) based backend redirection.
+
+![topology](Padded%20Socks.jpg)
 
 ## Features
 
