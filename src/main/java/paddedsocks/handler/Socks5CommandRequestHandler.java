@@ -38,7 +38,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
         if (msg.type().equals(Socks5CommandType.CONNECT)) {
             handleConnect(ctx, msg);
         } else {
-            //TODO handle other command type
+            //TODO: Do we need to handle any other command types?
             ctx.close();
         }
     }
