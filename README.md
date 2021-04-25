@@ -1,4 +1,4 @@
-# padded-socks
+# Padded Socks
 
 A netty based socks5 proxy server with support for proxy auto-config (wpad) based backend redirection.
 
