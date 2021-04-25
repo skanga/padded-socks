@@ -31,7 +31,7 @@ public class ProxyServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(acceptorGroup, workerGroup)
-                    .channel(socksConfig.getChannelClass())
+                    .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, socksConfig.getSocketBacklog())
                     .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, socksConfig.getConnectTimeoutMillis())
                     .childHandler(new Socks5WorkerChannelInitializer(socksConfig, forwarderGroup))
@@ -83,7 +83,6 @@ public class ProxyServer {
                 .split("\\s*,\\s*");
         socksConfig.setJsRunner(jsArray);
         socksConfig.setForceDirect(PropertiesLoader.getBoolProp("force.direct", false));
-        socksConfig.setChannelClass(NioServerSocketChannel.class);
         socksConfig.setChannelKeepAlive(PropertiesLoader.getBoolProp("channel.keep.alive", true));
         socksConfig.setChannelSendBuffer(PropertiesLoader.getIntProp("channel.send.buffer", 1024000));
         socksConfig.setChannelReceiveBuffer(PropertiesLoader.getIntProp("channel.receive.buffer", 1024000));
