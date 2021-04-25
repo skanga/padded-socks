@@ -1,0 +1,7 @@
+function FindProxyForURL(url, host)
+{
+  if (isPlainHostName(host))
+    return "DIRECT";
+  else
+    return "PROXY www-proxy-hqdc.us.oracle.com:80";
+}

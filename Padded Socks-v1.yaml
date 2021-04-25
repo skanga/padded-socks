@@ -1,0 +1,69 @@
+# Drawn on http://go.drawthe.net/
+diagram:
+  fill: "#3d3935"
+  columns: 5
+  rows: 6
+  gridLines: false
+title:
+  color: lightgrey
+  #heightPercentage: 6
+  logoFill: lightgrey
+  stroke: lightgrey
+  subText: "A simple tool to socksify a WPAD file."
+  text: "Padded Socks"
+  type: "bar"
+  author: Shiraz Kanga
+  company: None - Open Source Software
+  version: 1.0
+defaults: &defaults
+  color: "white"
+  fill: "#555555"
+  iconFamily: "azureEnterprise"
+  iconFill: "white"
+  iconStroke: "none"
+  stroke: "none"
+servers: &servers
+  <<: *defaults
+  fill: "#58585B"
+  icon: "webserver"
+icons:
+  laptop: {<<: *defaults, x: 0, y: 5, icon: "laptop"}
+  desktop: {<<: *defaults, x: 1, y: 5, icon: "workstationclient"}
+  phone: {<<: *defaults, x: 2, y: 5, icon: "phone"}
+  tablet: {<<: *defaults, x: 3, y: 5, icon: "tablet"}
+  curl: {<<: *defaults, x: 4, y: 5, icon: "genericapp"}
+  wpad.dat: {<<: *defaults, x: 1, y: 3, h: 2, icon: "databasegeneric", iconFill: "blue"}
+  Padded-Socks: {<<: *defaults, x: 2, y: 3, h: 2, w: 1.8, icon: "gateway", iconFill: "green"}
+  proxy1: {<<: *servers, x: 2, y: 1}
+  proxy2: {<<: *servers, x: 3, y: 1}
+  proxy3: {<<: *servers, x: 4, y: 1}
+  intranet: {<<: *defaults, x: 0, y: 0,  icon: "internet"}
+  internet1: {<<: *defaults, x: 2, y: 0, icon: "internet"}
+  internet2: {<<: *defaults, x: 3, y: 0, icon: "internet"}
+  internet3: {<<: *defaults, x: 4, y: 0, icon: "internet"}
+notes:
+  wpadComment: { x: 0, y: 3, h: 2, xAlign: center, yAlign: center, stroke: "blue", fill: "#000066",
+    text: "#NOTE:\n\nThe wpad file can be updated while the server is running." }
+connection: &connection
+  stroke: "white"
+  strokeDashArray: "10,2"
+connections:
+  - { <<: *connection, endpoints: ["laptop", "Padded-Socks"] }
+  - { <<: *connection, endpoints: ["desktop", "Padded-Socks"] }
+  - { <<: *connection, endpoints: ["phone", "Padded-Socks"] }
+  - { <<: *connection, endpoints: ["tablet", "Padded-Socks"] }
+  - { <<: *connection, endpoints: ["curl", "Padded-Socks"] }
+  - { <<: *connection, endpoints: ["Padded-Socks", "proxy1"] }
+  - { <<: *connection, endpoints: ["Padded-Socks", "proxy2"] }
+  - { <<: *connection, endpoints: ["Padded-Socks", "proxy3"] }
+  - { <<: *connection, endpoints: ["Padded-Socks", "intranet"] }
+  - { <<: *connection, endpoints: ["internet1", "proxy1"] }
+  - { <<: *connection, endpoints: ["internet2", "proxy2"] }
+  - { <<: *connection, endpoints: ["internet3", "proxy3"] }
+  - { endpoints: ["wpad.dat", "Padded-Socks"], stroke: "blue" }
+  - { endpoints: ["wpadComment", "wpad.dat"], stroke: "blue" }
+group: &group
+  - { color: "white", stroke: "lightgrey", fill: "rgba(0, 0, 0, 0.3)" }
+groups:
+  - { <<: *group, name: "Proxies", members: ["proxy1", "proxy2", "proxy3"] }
+  - { <<: *group, name: "Clients", members: ["laptop", "desktop", "phone", "tablet", "curl"] }
